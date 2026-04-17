@@ -1,0 +1,567 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SafeOrbit | Security Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#dee5ff",
+              "on-secondary-container": "#45d79c",
+              tertiary: "#ff716a",
+              "on-secondary-fixed": "#004930",
+              "on-surface": "#dee5ff",
+              "primary-fixed-dim": "#c3d4ff",
+              "on-surface-variant": "#91aaeb",
+              background: "#060e20",
+              "on-secondary-fixed-variant": "#006947",
+              "on-primary": "#003d88",
+              "secondary-dim": "#00b47d",
+              outline: "#5b74b1",
+              "primary-fixed": "#d8e2ff",
+              "secondary-container": "#00452d",
+              "tertiary-dim": "#ff716a",
+              "surface-container-lowest": "#000000",
+              "on-tertiary-fixed": "#000000",
+              "on-error": "#490106",
+              "inverse-on-surface": "#4d556b",
+              "tertiary-fixed": "#fd4e4d",
+              "inverse-surface": "#faf8ff",
+              "on-primary-fixed": "#003c86",
+              "surface-dim": "#060e20",
+              secondary: "#06b77f",
+              "surface-variant": "#00225a",
+              "error-dim": "#bb5551",
+              "on-primary-container": "#bdd0ff",
+              "secondary-fixed": "#6ffbbe",
+              "surface-tint": "#adc6ff",
+              "on-error-container": "#ff9993",
+              error: "#ee7d77",
+              "outline-variant": "#2b4680",
+              primary: "#adc6ff",
+              "on-tertiary": "#490005",
+              "on-tertiary-fixed-variant": "#3b0003",
+              "surface-bright": "#002867",
+              "on-tertiary-container": "#1f0001",
+              "primary-dim": "#98b8ff",
+              "surface-container-low": "#06122d",
+              "inverse-primary": "#005bc4",
+              "surface-container-high": "#031d4b",
+              "tertiary-container": "#fd4e4d",
+              "tertiary-fixed-dim": "#ec4142",
+              "error-container": "#7f2927",
+              "primary-container": "#004395",
+              "secondary-fixed-dim": "#5fedb0",
+              surface: "#060e20",
+              "on-primary-fixed-variant": "#0057bd",
+              "surface-container-highest": "#00225a",
+              "surface-container": "#05183c",
+              "on-secondary": "#002919",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            fontFamily: {
+              headline: ["Space Grotesk"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #060e20;
+        color: #dee5ff;
+      }
+      .font-headline {
+        font-family: "Space Grotesk", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+      /* Custom scrollbar for terminal feel */
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #060e20;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2b4680;
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container"
+  >
+    <!-- TopAppBar -->
+    <header
+      class="fixed top-0 w-full z-50 bg-[#060e20] flex items-center justify-between px-6 py-3 w-full bg-[#0d172d]"
+    >
+      <div class="flex items-center gap-3">
+        <span
+          class="material-symbols-outlined text-blue-500"
+          data-icon="security"
+          >security</span
+        >
+        <span
+          class="text-xl font-bold tracking-widest text-[#dee5ff] font-['Space_Grotesk'] tracking-tight"
+        >
+          SafeOrbit
+        </span>
+      </div>
+      <div class="hidden md:flex items-center gap-8">
+        <nav class="flex gap-6">
+          <a
+            class="text-[#dee5ff] border-b-2 border-blue-500 font-['Space_Grotesk'] tracking-tight px-1"
+            href="#"
+            >Dashboard</a
+          >
+          <a
+            class="text-slate-500 font-['Space_Grotesk'] tracking-tight hover:bg-slate-800/50 transition-colors px-1"
+            href="#"
+            >Scans</a
+          >
+          <a
+            class="text-slate-500 font-['Space_Grotesk'] tracking-tight hover:bg-slate-800/50 transition-colors px-1"
+            href="#"
+            >Vulnerabilities</a
+          >
+        </nav>
+        <div
+          class="h-8 w-8 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant/30"
+        >
+          <img
+            alt="Security Researcher Profile"
+            data-alt="Close-up portrait of a professional security researcher in a dimly lit high-tech environment with cyan and violet light accents"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7KPpS-4Nz5PioLgSkkUvLXM814m3a-YtE3W5hf67Q1moILeq0vlfTIEkDUcic5QloBK-xycHKNmrvHlsFeNXD6_27v8_36-rBGfNM70Zn_s1GsMHiMtEBOxtioLXsFWFOAYTRdtwwz29leuPLO3k9zOzScrKmL_DWhm0r5scxZaHO8eUO69smcuvvqaNfffLrz9K_651IYlQAV2PPNdGWHe2Yh4nlVnGSXXC0iGyDuBUHbAQ1ZnSmSy7DU_AjvEEZiLo2z6mcYm8R"
+          />
+        </div>
+      </div>
+    </header>
+    <!-- NavigationDrawer (Left) -->
+    <aside
+      class="hidden lg:flex flex-col h-screen w-64 fixed left-0 top-0 bg-[#060e20] bg-[#0d172d] py-8 px-4 gap-y-2 z-40 pt-20"
+    >
+      <div class="mb-8 px-2">
+        <span
+          class="text-blue-500 font-bold font-['Inter'] font-medium text-sm uppercase tracking-wider"
+          >ENGINE_V1</span
+        >
+      </div>
+      <a
+        class="flex items-center gap-3 px-4 py-3 rounded-md text-blue-400 bg-blue-500/10 font-bold border-r-2 border-blue-500 translate-x-1 transition-all"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="dashboard"
+          >dashboard</span
+        >
+        <span class="font-label text-sm uppercase tracking-wider"
+          >Dashboard</span
+        >
+      </a>
+      <a
+        class="flex items-center gap-3 px-4 py-3 rounded-md text-slate-500 hover:text-slate-300 hover:bg-slate-800/30 transition-all"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="radar">radar</span>
+        <span class="font-label text-sm uppercase tracking-wider">Scans</span>
+      </a>
+      <a
+        class="flex items-center gap-3 px-4 py-3 rounded-md text-slate-500 hover:text-slate-300 hover:bg-slate-800/30 transition-all"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="gpp_maybe"
+          >gpp_maybe</span
+        >
+        <span class="font-label text-sm uppercase tracking-wider"
+          >Vulnerabilities</span
+        >
+      </a>
+      <a
+        class="flex items-center gap-3 px-4 py-3 rounded-md text-slate-500 hover:text-slate-300 hover:bg-slate-800/30 transition-all"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="settings"
+          >settings</span
+        >
+        <span class="font-label text-sm uppercase tracking-wider"
+          >Settings</span
+        >
+      </a>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="min-h-screen pt-24 pb-20 lg:pl-64 flex justify-center">
+      <div class="w-full max-w-6xl px-6 lg:px-12">
+        <!-- Hero / Scan Section -->
+        <section class="mb-12">
+          <div
+            class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8"
+          >
+            <div>
+              <h1
+                class="text-4xl font-headline font-bold text-on-background tracking-tight mb-2"
+              >
+                Automated Security Testing
+              </h1>
+              <p class="text-on-surface-variant font-body">
+                Deep-packet inspection and API vulnerability orchestration
+                engine.
+              </p>
+            </div>
+            <div
+              class="flex items-center gap-4 bg-surface-container-low p-4 rounded-xl"
+            >
+              <div class="flex flex-col items-end">
+                <span
+                  class="text-[10px] font-label uppercase tracking-widest text-outline"
+                  >System Status</span
+                >
+                <span class="text-secondary font-headline font-medium"
+                  >OPERATIONAL</span
+                >
+              </div>
+              <div
+                class="w-3 h-3 rounded-full bg-secondary shadow-[0_0_10px_rgba(6,183,127,0.5)]"
+              ></div>
+            </div>
+          </div>
+          <!-- ScanForm -->
+          <div class="bg-surface-container rounded-2xl p-1 overflow-hidden">
+            <div
+              class="bg-surface-container-low p-6 md:p-8 flex flex-col md:flex-row gap-4 items-stretch"
+            >
+              <div class="flex-1 relative group">
+                <span
+                  class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline"
+                  data-icon="terminal"
+                  >terminal</span
+                >
+                <input
+                  class="w-full bg-surface-container-high border-none focus:ring-0 text-on-surface font-body pl-12 pr-4 py-4 rounded-lg placeholder:text-outline/50 transition-all focus:shadow-[0_2px_0_0_#98b8ff]"
+                  placeholder="https://api.safeorbit.io/v1/endpoint"
+                  type="url"
+                />
+              </div>
+              <button
+                class="bg-primary hover:bg-primary-dim text-on-primary font-headline font-bold px-8 py-4 rounded-lg transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
+              >
+                <span
+                  class="material-symbols-outlined text-xl"
+                  data-icon="rocket_launch"
+                  >rocket_launch</span
+                >
+                START SCAN
+              </button>
+            </div>
+          </div>
+        </section>
+        <!-- ScanStatus & Pulse Scanner -->
+        <section class="mb-12">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div
+              class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <span
+                  class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant"
+                  >Active Task</span
+                >
+                <span
+                  class="material-symbols-outlined text-primary-dim"
+                  data-icon="hourglass_empty"
+                  >hourglass_empty</span
+                >
+              </div>
+              <div class="text-2xl font-headline font-bold mb-1">
+                Scanning...
+              </div>
+              <div
+                class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden mt-4"
+              >
+                <div
+                  class="h-full bg-gradient-to-r from-primary to-secondary w-2/3 relative"
+                >
+                  <div class="absolute inset-0 bg-white/20 blur-sm"></div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <span
+                  class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant"
+                  >Threat Level</span
+                >
+                <span
+                  class="material-symbols-outlined text-tertiary"
+                  data-icon="warning"
+                  >warning</span
+                >
+              </div>
+              <div class="text-2xl font-headline font-bold mb-1 text-tertiary">
+                ELEVATED
+              </div>
+              <p class="text-xs text-on-surface-variant font-body">
+                2 High severity vulnerabilities identified in latest buffer.
+              </p>
+            </div>
+            <div
+              class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <span
+                  class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant"
+                  >Endpoint Health</span
+                >
+                <span
+                  class="material-symbols-outlined text-secondary"
+                  data-icon="check_circle"
+                  >check_circle</span
+                >
+              </div>
+              <div class="text-2xl font-headline font-bold mb-1">94.2%</div>
+              <p class="text-xs text-on-surface-variant font-body">
+                Average response time 142ms across all regions.
+              </p>
+            </div>
+          </div>
+        </section>
+        <!-- ResultsTable Section -->
+        <section>
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-headline font-bold tracking-tight">
+              Detection Manifest
+            </h2>
+            <div class="flex gap-2">
+              <button
+                class="bg-surface-container-high px-3 py-1.5 rounded text-xs font-label uppercase tracking-tighter text-on-surface-variant hover:text-on-surface transition-colors"
+              >
+                Export JSON
+              </button>
+              <button
+                class="bg-surface-container-high px-3 py-1.5 rounded text-xs font-label uppercase tracking-tighter text-on-surface-variant hover:text-on-surface transition-colors"
+              >
+                Filters
+              </button>
+            </div>
+          </div>
+          <div class="bg-surface-container-low rounded-2xl overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-surface-container-highest/30">
+                    <th
+                      class="px-6 py-4 text-[10px] font-label uppercase tracking-widest text-outline"
+                    >
+                      Resource URL
+                    </th>
+                    <th
+                      class="px-6 py-4 text-[10px] font-label uppercase tracking-widest text-outline"
+                    >
+                      Vulnerability Type
+                    </th>
+                    <th
+                      class="px-6 py-4 text-[10px] font-label uppercase tracking-widest text-outline"
+                    >
+                      Severity
+                    </th>
+                    <th
+                      class="px-6 py-4 text-[10px] font-label uppercase tracking-widest text-outline text-right"
+                    >
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant/5">
+                  <tr
+                    class="hover:bg-surface-container-high/40 transition-colors group"
+                  >
+                    <td
+                      class="px-6 py-5 font-mono text-xs text-on-surface-variant group-hover:text-primary transition-colors"
+                    >
+                      /v1/auth/session_dump
+                    </td>
+                    <td class="px-6 py-5 font-body text-sm font-medium">
+                      SQL Injection (Time-based)
+                    </td>
+                    <td class="px-6 py-5">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-tertiary-container text-tertiary"
+                        >CRITICAL</span
+                      >
+                    </td>
+                    <td class="px-6 py-5 text-right">
+                      <span class="text-tertiary font-label text-xs font-bold"
+                        >DETECTED</span
+                      >
+                    </td>
+                  </tr>
+                  <tr
+                    class="hover:bg-surface-container-high/40 transition-colors group"
+                  >
+                    <td
+                      class="px-6 py-5 font-mono text-xs text-on-surface-variant group-hover:text-primary transition-colors"
+                    >
+                      /cdn-cgi/scripts/5c...
+                    </td>
+                    <td class="px-6 py-5 font-body text-sm font-medium">
+                      Cross-Site Scripting (XSS)
+                    </td>
+                    <td class="px-6 py-5">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary-container text-primary"
+                        >MEDIUM</span
+                      >
+                    </td>
+                    <td class="px-6 py-5 text-right">
+                      <span class="text-primary font-label text-xs font-bold"
+                        >DETECTED</span
+                      >
+                    </td>
+                  </tr>
+                  <tr
+                    class="hover:bg-surface-container-high/40 transition-colors group"
+                  >
+                    <td
+                      class="px-6 py-5 font-mono text-xs text-on-surface-variant group-hover:text-primary transition-colors"
+                    >
+                      /api/v2/user/settings
+                    </td>
+                    <td class="px-6 py-5 font-body text-sm font-medium">
+                      Insecure Direct Object Reference
+                    </td>
+                    <td class="px-6 py-5">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-secondary-container text-secondary"
+                        >LOW</span
+                      >
+                    </td>
+                    <td class="px-6 py-5 text-right">
+                      <span
+                        class="text-on-surface-variant/40 font-label text-xs font-bold italic"
+                        >MITIGATED</span
+                      >
+                    </td>
+                  </tr>
+                  <tr
+                    class="hover:bg-surface-container-high/40 transition-colors group"
+                  >
+                    <td
+                      class="px-6 py-5 font-mono text-xs text-on-surface-variant group-hover:text-primary transition-colors"
+                    >
+                      /healthz
+                    </td>
+                    <td class="px-6 py-5 font-body text-sm font-medium">
+                      Header Disclosure
+                    </td>
+                    <td class="px-6 py-5">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-secondary-container text-secondary"
+                        >INFO</span
+                      >
+                    </td>
+                    <td class="px-6 py-5 text-right">
+                      <span class="text-secondary font-label text-xs font-bold"
+                        >NOT DETECTED</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- BottomNavBar (Mobile Only) -->
+    <nav
+      class="fixed bottom-0 w-full z-50 md:hidden bg-[#0d172d]/80 backdrop-blur-xl flex justify-around items-center h-16 px-4 border-t border-slate-800/50 shadow-2xl shadow-black"
+    >
+      <a
+        class="text-blue-400 bg-blue-500/10 rounded-xl p-2 active:scale-90 duration-150"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="analytics"
+          >analytics</span
+        >
+      </a>
+      <a
+        class="text-slate-500 p-2 hover:text-blue-300 active:scale-90 duration-150"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="history"
+          >history</span
+        >
+      </a>
+      <a
+        class="text-slate-500 p-2 hover:text-blue-300 active:scale-90 duration-150"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="terminal"
+          >terminal</span
+        >
+      </a>
+      <a
+        class="text-slate-500 p-2 hover:text-blue-300 active:scale-90 duration-150"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="admin_panel_settings"
+          >admin_panel_settings</span
+        >
+      </a>
+    </nav>
+    <!-- Contextual FAB (Hidden on detail screens, but shown here for dashboard context) -->
+    <div class="fixed right-6 bottom-20 md:bottom-8 z-40">
+      <button
+        class="w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg shadow-primary/20 flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
+      >
+        <span
+          class="material-symbols-outlined"
+          data-icon="add"
+          style="
+            font-variation-settings:
+              &quot;FILL&quot; 0,
+              &quot;wght&quot; 600;
+          "
+          >add</span
+        >
+      </button>
+    </div>
+  </body>
+</html>
